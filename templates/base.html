@@ -1,0 +1,48 @@
+ {% load static %}
+ <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <nav class="navbar">
+    <div class="logo">
+        <img src="{% static 'images/logo.png' %}" alt="logo">
+    </div>
+
+    <div class="nav-links">
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'historique' %}">Historique</a>
+        <a href="{% url 'rapport' %}">Rapport</a>
+<form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="logout-btn">Logout</button>
+</form>
+    </div>
+</nav>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+</div>
+
+<footer class="footer">
+    Connecté : <strong>{{ request.user.username }}</strong>
+    {% if request.user.is_staff %}
+        <span class="badge">ADMIN</span>
+    {% endif %}
+</footer>
+
+</body>
+</html>

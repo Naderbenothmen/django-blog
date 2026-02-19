@@ -1,0 +1,117 @@
+
+/* ===== General ===== */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #0f172a;
+    color: white;
+}
+
+/* ===== Layout ===== */
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+    width: 250px;
+    background-color: #1e293b;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Logo */
+.logo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo img {
+    width: 120px;
+}
+
+/* Links */
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: white;
+    transform: translateX(5px);
+}
+
+/* ===== Main Content ===== */
+.main-content {
+    flex: 1;
+    padding: 40px;
+}
+
+/* ===== Cards ===== */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background-color: #1e293b;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.card h2 {
+    margin: 10px 0;
+    font-size: 28px;
+    color: #38bdf8;
+}
+
+/* ===== Graph Section ===== */
+.graph {
+    background-color: #1e293b;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+/* ===== Footer ===== */
+.footer {
+    background-color: #1e293b;
+    padding: 15px 20px;
+    text-align: right;
+    font-size: 14px;
+}
+
+.badge {
+    background-color: #38bdf8;
+    color: black;
+    padding: 3px 8px;
+    border-radius: 5px;
+    margin-left: 10px;
+    font-weight: bold;
+}
+.logout-btn {
+    background: none;
+    border: none;
+    color: #38bdf8;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+}
+
+.logout-btn:hover {
+    color: white;
+}
+

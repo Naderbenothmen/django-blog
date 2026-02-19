@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+    <h1>Dashboard</h1>
+
+    <div class="cards">
+        <div class="card">
+            <p>Tension</p>
+            <h2>220 V</h2>
+        </div>
+
+        <div class="card">
+            <p>Courant</p>
+            <h2>5 A</h2>
+        </div>
+
+        <div class="card">
+            <p>Puissance</p>
+            <h2>1100 W</h2>
+        </div>
+
+        <div class="card">
+            <p>Énergie totale</p>
+            <h2>350 kWh</h2>
+        </div>
+    </div>
+
+    <div class="chart">
+        <h2>Graphique</h2>
+        <div class="chart-placeholder">
+            Graph here
+        </div>
+    </div>
+
+</div>
+{% endblock %}

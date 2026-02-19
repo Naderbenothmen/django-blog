@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Proments Monastir</title>
+
+    <style>
+        @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: url("{% static 'images/bak.jpg' %}") no-repeat center center fixed;
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(15, 23, 42, 0.7); /* dark overlay باش الكلام يبان */
+        top: 0;
+        left: 0;
+    }
+
+    .container {
+    position: relative;
+    text-align: center;
+    color: white;
+    padding: 60px 70px;
+    border-radius: 25px;
+    backdrop-filter: blur(15px);
+    background: rgba(15, 23, 42, 0.65);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+
+   .logo {
+    width: 350px;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: 48px;
+    margin: 10px 0;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 26px;
+    color: #38bdf8;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+.btn {
+    margin-top: 35px;
+    padding: 14px 40px;
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 10px 25px rgba(14,165,233,0.4);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(14,165,233,0.6);
+}
+
+</style>
+
+  
+</head>
+<body>
+    <div class="overlay"></div>
+
+<div class="container">
+    <img src="{% static 'images/logo.png' %}" class="logo" alt="Logo">
+
+    <h1>Welcome</h1>
+    <h2>Proments Monastir</h2>
+
+    <a href="{% url 'login' %}">
+    <button class="btn">Login</button>
+</a>
+
+</div>
+
+</body>
+</html>
