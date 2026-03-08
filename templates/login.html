@@ -118,7 +118,7 @@
 
 <div class="card">
 
-    <img src="{% static 'images/logo.png' %}" class="logo">
+    <img src="{% static 'images/logo-test.png' %}" class="logo">
 
     <h2>Se connecter</h2>
     {% if error %}
@@ -126,20 +126,20 @@
 {% endif %}
 
 
-    <form method="post">
-        {% csrf_token %}
+   <form method="POST">
+    {% csrf_token %}
+<div class="input-group">
+    <label>Email</label>
+    <input type="text" name="email" placeholder="example@proments.com" required>
+</div>
 
-        <div class="input-group">
-            <label>Email</label>
-            <input type="email" name="email" placeholder="example@proments.com">
-        </div>
+<div class="input-group">
+    <label>Mot de passe</label>
+    <input type="password" name="password" placeholder="Mot de passe" required>
+</div>
 
-        <div class="input-group">
-            <label>Mot de passe</label>
-            <input type="password" name="password" placeholder="••••••••">
-        </div>
+<button type="submit" class="btn">Connexion</button>
 
-        <button type="submit" class="btn">Connexion</button>
         <div class="extra-links">
     <a href="{% url 'forgot_password' %}">Mot de passe oublié ?</a>
 </div>

@@ -5,34 +5,134 @@
 
     <h1>Dashboard</h1>
 
-    <div class="cards">
-        <div class="card">
-            <p>Tension</p>
-            <h2>220 V</h2>
-        </div>
+<div class="cards">
 
-        <div class="card">
-            <p>Courant</p>
-            <h2>5 A</h2>
-        </div>
-
-        <div class="card">
-            <p>Puissance</p>
-            <h2>1100 W</h2>
-        </div>
-
-        <div class="card">
-            <p>Énergie totale</p>
-            <h2>350 kWh</h2>
-        </div>
+    <div class="card">
+        <h3>Tension</h3>
+        <h2>{{ last_mesure.tension }} V</h2>
     </div>
 
-    <div class="chart">
-        <h2>Graphique</h2>
-        <div class="chart-placeholder">
-            Graph here
-        </div>
+    <div class="card">
+        <h3>Courant</h3>
+        <h2>{{ last_mesure.courant }} A</h2>
+    </div>
+
+    <div class="card">
+        <h3>Puissance</h3>
+        <h2>{{ last_mesure.puissance }} W</h2>
+    </div>
+
+    <div class="card">
+        <h3>Cos φ</h3>
+        <h2>{{ last_mesure.cos_phi }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Fréquence</h3>
+        <h2>{{ last_mesure.frequence }} Hz</h2>
+    </div>
+
+    <div class="card">
+        <h3>Energie</h3>
+        <h2>{{ last_mesure.energie }} kWh</h2>
     </div>
 
 </div>
+
+    <div class="chart">
+         <canvas id="energyChart" style="height:300px;"></canvas>        </div>
+    
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+let ctx = document.getElementById('energyChart').getContext('2d');
+
+let energyChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [
+{
+    label: 'Tension (V)',
+    data: [],
+    borderWidth: 2
+},
+{
+    label: 'Courant (A)',
+    data: [],
+    borderWidth: 2
+},
+{
+    label: 'Puissance (W)',
+    data: [],
+    borderWidth: 2
+}
+]
+        
+    },
+    options: {
+    scales: {
+        y: {
+            type: 'linear',
+            position: 'left',
+        },
+        y1: {
+            type: 'linear',
+            position: 'right',
+            grid: {
+                drawOnChartArea: false
+            }
+        }
+    }
+}
+});
+
+function fetchEnergy() {
+    fetch('/api/energy/')
+        .then(response => response.json())
+        .then(data => {
+            let energy = data[0];
+
+            // تحديث الكروت
+            document.getElementById("tension").innerText =
+                energy.voltage.toFixed(1) + " V";
+
+            document.getElementById("courant").innerText =
+                energy.current.toFixed(1) + " A";
+
+            document.getElementById("puissance").innerText =
+                energy.power.toFixed(1) + " W";
+
+            document.getElementById("energie").innerText =
+                energy.energy.toFixed(1) + " kWh";
+                 document.getElementById("frequence").innerText =
+                energy.energy.toFixed(1) + " Hz";
+                document.getElementById("frequence").innerText =
+                energy.energy.toFixed(1) + " Hz";
+
+            // تحديث الـ graph
+            let now = new Date().toLocaleTimeString();
+
+         energyChart.data.labels.push(now);
+         energyChart.data.datasets[0].data.push(energy.voltage);
+         energyChart.data.datasets[1].data.push(energy.current);
+         energyChart.data.datasets[2].data.push(energy.power);
+
+            // نخلي غير آخر 20 نقطة
+            if (energyChart.data.labels.length > 20) {
+                energyChart.data.labels.shift();
+                energyChart.data.datasets[0].data.shift();
+            }
+
+            energyChart.update();
+        });
+}
+
+setInterval(fetchEnergy, 1000);
+fetchEnergy();
+</script>
 {% endblock %}

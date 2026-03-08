@@ -12,20 +12,49 @@
 
     <!-- Sidebar -->
     <aside class="sidebar">
-        <nav class="navbar">
+      <nav class="navbar">
+            
     <div class="logo">
-        <img src="{% static 'images/logo.png' %}" alt="logo">
-    </div>
+    <img src="{% static 'images/logo-test.png' %}" alt="logo">
+</div>
 
     <div class="nav-links">
-        <a href="{% url 'dashboard' %}">Dashboard</a>
-        <a href="{% url 'historique' %}">Historique</a>
-        <a href="{% url 'rapport' %}">Rapport</a>
-<form method="post" action="{% url 'logout' %}">
-    {% csrf_token %}
-    <button type="submit" class="logout-btn">Logout</button>
-</form>
+
+    <a href="{% url 'dashboard' %}">Dashboard</a>
+    <a href="{% url 'historique' %}">Historique</a>
+    <a href="{% url 'rapport' %}">Rapport</a>
+
+    {% if request.user.is_superuser %}
+  <div class="admin-item">
+    
+    {% if user.is_superuser %}
+    
+   <div class="dropdown" id="adminDropdown">
+
+    <div class="dropdown-btn">
+        Admin
+        <span class="arrow">▾</span>
     </div>
+
+    <div class="dropdown-content">
+        <a href="{% url 'admin:index' %}">Admin Panel</a>
+        <a href="{% url 'gestion_users' %}">Gestion des utilisateurs</a>
+        <a href="{% url 'settings' %}">Settings</a>
+    </div>
+
+</div>
+
+    {% endif %}
+
+  </div>
+    {% endif %}
+
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="logout-btn">Logout</button>
+    </form>
+
+</div>
 </nav>
 
     </aside>
@@ -43,6 +72,18 @@
         <span class="badge">ADMIN</span>
     {% endif %}
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% block scripts %}{% endblock %}
 
-</body>
+<script>
+document.addEventListener("click", function(event) {
+    const dropdown = document.getElementById("adminDropdown");
+
+    if (!dropdown.contains(event.target)) {
+        dropdown.querySelector(".dropdown-content").style.opacity = "0";
+        dropdown.querySelector(".dropdown-content").style.visibility = "hidden";
+        dropdown.querySelector(".dropdown-content").style.transform = "translateY(-10px)";
+    }
+});
+</script>
 </html>

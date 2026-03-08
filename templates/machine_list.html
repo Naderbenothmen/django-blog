@@ -1,0 +1,15 @@
+<h2>Liste des Machines</h2>
+
+<table>
+<tr>
+    <th>Nom</th>
+    <th>Position</th>
+</tr>
+
+{% for m in machines %}
+<tr>
+    <td>{{ m.name }}</td>
+    <td>{{ m.location }}</td>
+</tr>
+{% endfor %}
+</table>
